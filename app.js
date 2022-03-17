@@ -34,6 +34,17 @@ addDetailItem.addEventListener('click',()=>{
     let itemPriceText = itemPriceInput.value;
     let itemQuantityText = itemQuantityInput.value;
 
+    // Error handle
+    if (itemNameText == '' ||
+        itemPriceText == '' || 
+        itemPriceText < 0 || 
+        itemQuantityText == ''|| 
+        itemQuantityText < 0
+        ) {
+            console.log("sorry.....! Filed Empty");
+            return;
+        }
+
     const infoTable = getId('info-table')
 
     const totalPrice = parseInt(itemPriceText) * parseInt(itemQuantityText);
@@ -72,6 +83,12 @@ function totalCalculation() {
     const subTotal = calculationSubTotal()
     const subTotalToDisplay = getId('sub-total')
     subTotalToDisplay.innerText = subTotal;
+
+    let tax = subTotal * 0.2;
+    
+    getId('tax').innerText = tax.toFixed(2);
+    getId('grand-total').innerText = subTotal + tax;
+    getId('grand-total-2').innerText = subTotal + tax;
 }
 
 function calculationSubTotal() {
